@@ -1,15 +1,19 @@
-package com.test.zonky.domains;
+package com.test.zonky.data;
 
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * Generated object Loan form JSON.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Loan {
 
-    private Integer id;
+    private Long id;
     private String url;
     private String name;
     private String story;
@@ -26,7 +30,7 @@ public class Loan {
     private Boolean covered;
     private String datePublished;
     private Boolean published;
-    private String deadline;
+    private Date deadline;
     private Integer investmentsCount;
     private Integer questionsCount;
     private String region;
@@ -35,11 +39,11 @@ public class Loan {
     private List<InsuranceHistory> insuranceHistory = null;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -171,11 +175,11 @@ public class Loan {
         this.published = published;
     }
 
-    public String getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(String deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 

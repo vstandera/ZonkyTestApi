@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ShowFines</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<!--/*@thymesVar id="market" type="java.util.List"*/-->
+<!--/*@thymesVar id="loan" type="com.test.zonky.data.Loan"*/-->
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-9 col-md-offset-1">
+            <div class="panel panel-primary">
+
+                <div class="panel-heading">
+                    <h1 class="panel-title">Marketplace Zonky</h1>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive" th:if="${not #lists.isEmpty(market)}">
+                        <table class="table table-hover ">
+                            <thead class="thead-inverse">
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Rating</th>
+                                <th>URL</th>
+                                <th>Deadline</th>
+                                <th>Purpose</th>
+                                <th>Story</th>
+                                <th>Amount</th>
+                                <th>Region</th>
+                            </tr>
+                            <tr th:each="loan : ${market}">
+                                <td th:text="${loan.id}">1</td>
+                                <td th:text="${loan.name}"></td>
+                                <td th:text="${loan.rating}"></td>
+                                <td><a th:href="${loan.url}">Odkaz</a> </td>
+                                <td th:text="${loan.deadline}"></td>
+                                <td th:text="${loan.purpose}"></td>
+                                <td th:text="${loan.story}"></td>
+                                <td th:text="${loan.amount}"></td>
+                                <td th:text="${loan.region}"></td>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

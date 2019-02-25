@@ -1,30 +1,33 @@
-package com.test.zonky.domains;
+package com.test.zonky.data;
 
 import java.util.HashMap;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * Generated object Photo form JSON.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class InsuranceHistory {
+public class Photo {
 
-    private String policyPeriodFrom;
-    private String policyPeriodTo;
+    private String name;
+    private String url;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public String getPolicyPeriodFrom() {
-        return policyPeriodFrom;
+    public String getName() {
+        return name;
     }
 
-    public void setPolicyPeriodFrom(String policyPeriodFrom) {
-        this.policyPeriodFrom = policyPeriodFrom;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPolicyPeriodTo() {
-        return policyPeriodTo;
+    public String getUrl() {
+        return url;
     }
 
-    public void setPolicyPeriodTo(String policyPeriodTo) {
-        this.policyPeriodTo = policyPeriodTo;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Map<String, Object> getAdditionalProperties() {

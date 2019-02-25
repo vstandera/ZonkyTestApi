@@ -1,7 +1,10 @@
 package com.test.zonky.services;
 
-import com.test.zonky.domains.Loan;
-import com.test.zonky.domains.Raiting;
+import com.test.zonky.controllers.MarketRestController;
+import com.test.zonky.data.Loan;
+import com.test.zonky.data.Loans;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -9,58 +12,36 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ZonkyServiceImpl implements ZonkyService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MarketRestController.class);
 
     @Value("${secured.service.marketplace.url}")
     private String marketPlace;
 
-    public ZonkyServiceImpl() {
+    Loans loans;
+
+
+    public ZonkyServiceImpl(Loans loans) {
+        this.loans = loans;
     }
 
     /**
-     * Method call Zomky marketplace.
-     * @param rating
+     * Call Zonky marketplace.
      * @return
      */
     @Override
-    public List<Loan> getMarketplace(Raiting rating) {
+    public void getMarketplace() {
         final HashMap<String, String> urlParam = new HashMap<>();
-        urlParam.put("rating", rating.name());
-
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<List<Loan>> rateResponse = restTemplate.exchange(marketPlace, HttpMethod.GET, null, new ParameterizedTypeReference<List<Loan>>() {
         }, urlParam);
-        List<Loan> loans = rateResponse.getBody();
-        loans.forEach(lo -> System.out.println("Readed loan object --" + lo));
-        System.out.println("list of loans >>>>" + loans);
-
-        return loans;
-    }
-
-    /**
-     * Method returns average loan amount.
-     * @param loans
-     * @param raiting
-     * @return
-     */
-    @Override
-    public Long getAverageLoanAmount(List<Loan> loans, Raiting raiting) {
-        long amountSum = 0;
-        List<Integer> filteredAmounts = loans.stream().filter(lo -> lo.getRating().equals(raiting.name())).map(lo -> lo.getAmount()).collect(Collectors.toList());
-        for (Integer am : filteredAmounts) {
-            amountSum = amountSum + am;
-        }
-        if (filteredAmounts.size() > 0) {
-            return amountSum / filteredAmounts.size();
-        } else {
-            return 0L;
-        }
+        List<Loan> loan = rateResponse.getBody();
+        LOGGER.debug("Here is a loans from Zonky marketplace.", loan);
+        loans.setLoans(loan);
     }
 
 
